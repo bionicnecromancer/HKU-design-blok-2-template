@@ -1,6 +1,15 @@
 [gd_scene format=3 uid="uid://bekkosy715ka"]
 
 [ext_resource type="PackedScene" uid="uid://bythjbtwenglh" path="res://player.tscn" id="1_u52ul"]
+[ext_resource type="PackedScene" uid="uid://b8l3bw80sn4io" path="res://enemy.tscn" id="2_vonw3"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_rf0sq"]
+vertices = PackedVector3Array(-250.04459, -0.49999976, -255.9754, -250.04459, -0.49999976, 243.0246, 248.95541, -0.49999976, 243.0246, 248.95541, -0.49999976, -255.9754)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+agent_height = 1.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rf0sq"]
+size = Vector3(500, 1, 500)
 
 [sub_resource type="Gradient" id="Gradient_5xgho"]
 offsets = PackedFloat32Array(0.9, 1)
@@ -21,10 +30,18 @@ uv1_triplanar = true
 [sub_resource type="BoxMesh" id="BoxMesh_rf0sq"]
 size = Vector3(500, 1, 500)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_rf0sq"]
-size = Vector3(500, 1, 500)
-
 [node name="level" type="Node3D" unique_id=872129187]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=861146947]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.54458094, 0.49999976, 6.4753923)
+navigation_mesh = SubResource("NavigationMesh_rf0sq")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D" unique_id=1114738772]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.54458094, -0.49999976, -6.4753923)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D" unique_id=868002984]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("BoxShape3D_rf0sq")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=228807726]
 transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 4.7426405, 4.2426405)
@@ -34,14 +51,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 material_override = SubResource("StandardMaterial3D_u12re")
 mesh = SubResource("BoxMesh_rf0sq")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1114738772]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=868002984]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-shape = SubResource("BoxShape3D_rf0sq")
-
 [node name="player" parent="." unique_id=399192236 instance=ExtResource("1_u52ul")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="Camera3D" type="Camera3D" parent="player" unique_id=1924055913]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 4.2426405, 4.2426405)
+
+[node name="enemy" parent="." unique_id=543033062 instance=ExtResource("2_vonw3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.54458094, 0.49999976, 6.4753923)
