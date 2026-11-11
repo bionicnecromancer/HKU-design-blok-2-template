@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://bekkosy715ka"]
+
+[ext_resource type="PackedScene" uid="uid://bythjbtwenglh" path="res://player.tscn" id="1_u52ul"]
+
+[sub_resource type="Gradient" id="Gradient_5xgho"]
+offsets = PackedFloat32Array(0.9, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1i7i1"]
+gradient = SubResource("Gradient_5xgho")
+width = 120
+height = 120
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u12re"]
+albedo_texture = SubResource("GradientTexture2D_1i7i1")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_rf0sq"]
+size = Vector3(500, 1, 500)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rf0sq"]
+size = Vector3(500, 1, 500)
+
+[node name="level" type="Node3D" unique_id=872129187]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=228807726]
+transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 4.7426405, 4.2426405)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1629869851]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+material_override = SubResource("StandardMaterial3D_u12re")
+mesh = SubResource("BoxMesh_rf0sq")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1114738772]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=868002984]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("BoxShape3D_rf0sq")
+
+[node name="player" parent="." unique_id=399192236 instance=ExtResource("1_u52ul")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="Camera3D" type="Camera3D" parent="player" unique_id=1924055913]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 4.2426405, 4.2426405)
