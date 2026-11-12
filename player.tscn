@@ -1,17 +1,27 @@
 [gd_scene format=3 uid="uid://bythjbtwenglh"]
 
 [ext_resource type="Script" uid="uid://bjcky606gldmt" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="PackedScene" uid="uid://bjqpgxjul4fet" path="res://weapon.tscn" id="2_onrkg"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rf0sq"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_rf0sq"]
 
+[sub_resource type="SphereMesh" id="SphereMesh_rtniu"]
+radius = 0.2
+height = 0.4
+
 [node name="player" type="CharacterBody3D" unique_id=399192236 groups=["player"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("1_4flbx")
+
+[node name="Weapon" parent="." unique_id=704009685 instance=ExtResource("2_onrkg")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=431536536]
 shape = SubResource("CapsuleShape3D_rf0sq")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1386538171]
 mesh = SubResource("CapsuleMesh_rf0sq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D" unique_id=1768016539]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43434787, 0.45832467)
+mesh = SubResource("SphereMesh_rtniu")
